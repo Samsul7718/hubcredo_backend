@@ -19,7 +19,7 @@ app.use(cors({
     origin:[
         // "https://ecommerce-three-umber.vercel.app",
         
-        "http://localhost:3000",
+        "https://hubcredo-frontend-nxxw.vercel.app",
         "http://localhost:5173",
         "http://localhost:5174"
     ],
