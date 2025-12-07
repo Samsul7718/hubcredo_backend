@@ -15,12 +15,11 @@ app.use(express.json());
 
 // middleware
 app.use(bodyParser.json());
+// "https://ecommerce-three-umber.vercel.app",
+// "http://localhost:3000",
 app.use(cors({
     origin:[
-        // "https://ecommerce-three-umber.vercel.app",
-        
-        // "http://localhost:3000",
-        "https://hubcredo-frontend-nxxw.vercel.app",
+        "https://hubcredo-frontend-kappa.vercel.app/login",
         "http://localhost:5173",
         "http://localhost:5174"
     ],
