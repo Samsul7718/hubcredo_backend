@@ -19,13 +19,15 @@ app.use(bodyParser.json());
 // "http://localhost:3000",
 app.use(cors({
     origin:[
-        "https://hubcredo-frontend-kappa.vercel.app/login",
+        "https://hubcredo-frontend-kappa.vercel.app",
         "http://localhost:5173",
         "http://localhost:5174"
     ],
-    methods:['GET','POST'],
+    methods:['GET','POST','PUT','DELETE','PATCH','OPTIONS '],
     credentials:true
 }))
+
+app.options("*", cors());
 
 app.get('/',(req,res)=>{
     res.send("Server is ready to serve");
