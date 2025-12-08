@@ -23,7 +23,7 @@ app.use(cors({
         "http://localhost:5173",
         "http://localhost:5174"
     ],
-    methods:['GET','POST','PUT','DELETE','PATCH','OPTIONS '],
+    methods:['GET','POST','OPTIONS '],
     credentials:true
 }))
 
@@ -90,9 +90,9 @@ app.post('/login',async(req,res)=>{
         return res.status(500).json({ message: "Server error" });
       }
 });
+export default app;
+// const port=process.env.PORT || 3000;
 
-const port=process.env.PORT || 3000;
-
-app.listen(port,(req,res)=>{
-    console.log(`Server is running at http://localhost:${port}`);
-})
+// app.listen(port,(req,res)=>{
+//     console.log(`Server is running at http://localhost:${port}`);
+// })
