@@ -6,7 +6,7 @@ import cors from 'cors';
 import products from '../product.js';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-// import serverless from 'serverless-http';
+import serverless from 'serverless-http';
 
 
 dotenv.config();
@@ -124,6 +124,6 @@ if (process.env.NODE_ENV !== "production") {
     console.log(`Server running on http://localhost:${port}`);
   });
 }
-export default app;
-// export const handler = serverless(app);
-// export default handler;
+// export default app;
+export const handler = serverless(app);
+export default handler;
