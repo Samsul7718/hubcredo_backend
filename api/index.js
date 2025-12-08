@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import products from './product.js';
+import products from '../product.js';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -29,6 +29,33 @@ app.use(cors({
 
 app.options("*", cors());
 
+// Mongodb Serverless connection
+
+let isConnected=false;
+const connectDB=async()=>{
+    if(isConnected) return;
+    
+    try{
+      await mongoose.connect(process.env.MONGODB_URL);
+        isConnected = true;
+    console.log("MongoDB connected");
+
+    }catch(error){
+        console.log("Error connecting to MongoDB:",error);
+        throw error;
+    }
+  }
+
+  // Ensure DB connection 
+  app.use(async(req,res,next)=>{
+   try {
+    await connectDB();
+    next();
+  } catch (error) {
+    return res.status(500).json({ message: "Database connection failed" });
+  }
+  })
+
 app.get('/',(req,res)=>{
     res.send("Server is ready to serve");
 })
@@ -37,13 +64,9 @@ app.get("/api/product", (req, res) => {
   res.json(products);
 });
 
-// connect to mongodb
-mongoose.connect(process.env.MONGODB_URL)
-.then(() => console.log("MongoDB connected"))
-.catch((err) => console.log(err));
-
 // user model
-const User=mongoose.model('User',new mongoose.Schema({
+const User = mongoose.models.User ||
+  mongoose.model("User", new mongoose.Schema({
     name:String,
     mobile:Number,
     email: { type: String, unique: true },
