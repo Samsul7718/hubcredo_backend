@@ -32,7 +32,7 @@ app.options("*", cors());
 // Mongodb Serverless connection
 
 let isConnected=false;
-const connectDB=async()=>{
+async function connectDB(){
     if(isConnected) return;
     
     try{
@@ -56,14 +56,18 @@ const connectDB=async()=>{
   }
   })
 
-app.get('/',(req,res)=>{
-    res.send("Server is ready to serve");
-})
+  // Test Route
+app.get("/test", (req, res) => {
+  res.json({ message: "Backend is live ✅" });
+});
 
 app.get("/api/product", (req, res) => {
   res.json(products);
 });
 
+// app.get('/',(req,res)=>{
+//     res.send("Server is ready to serve");
+// })
 // user model
 const User = mongoose.models.User ||
   mongoose.model("User", new mongoose.Schema({
