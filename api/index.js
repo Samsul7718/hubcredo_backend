@@ -6,7 +6,7 @@ import cors from 'cors';
 import products from '../product.js';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import serverless from 'serverless-http';
+// import serverless from 'serverless-http';
 
 
 dotenv.config();
@@ -17,18 +17,18 @@ app.use(express.json());
 // middleware
 app.use(bodyParser.json());
 // "https://ecommerce-three-umber.vercel.app",
-// "http://localhost:3000",
+// "https://hubcredo-frontend-kappa.vercel.app",
 app.use(cors({
-    origin:[
-        "https://hubcredo-frontend-kappa.vercel.app",
+  origin:[
+      "http://localhost:3000",
         "http://localhost:5173",
         "http://localhost:5174"
     ],
-    methods:['GET','POST','OPTIONS '],
+    methods:['GET', 'POST', 'OPTIONS'],
     credentials:true
 }))
 
-app.options("*", cors());
+// app.options("*", cors());
 
 // Mongodb Serverless connection
 
@@ -62,13 +62,11 @@ app.get("/test", (req, res) => {
   res.json({ message: "Backend is live ✅" });
 });
 
-app.get("/api/product", (req, res) => {
+app.get("/product", (req, res) => {
   res.json(products);
 });
+const port=process.env.PORT || 3000;
 
-// app.get('/',(req,res)=>{
-//     res.send("Server is ready to serve");
-// })
 // user model
 const User = mongoose.models.User ||
   mongoose.model("User", new mongoose.Schema({
@@ -117,11 +115,14 @@ app.post('/login',async(req,res)=>{
       }catch(error){
         return res.status(500).json({ message: "Server error" });
       }
-});
-export const handler = serverless(app);
-export default handler;
-// const port=process.env.PORT || 3000;
+    });
+    // const port=process.env.PORT || 3000;
 
-// app.listen(port,(req,res)=>{
-//     console.log(`Server is running at http://localhost:${port}`);
-// })
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
+export default app;
+// export const handler = serverless(app);
+// export default handler;
