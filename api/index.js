@@ -18,9 +18,10 @@ app.use(express.json());
 app.use(bodyParser.json());
 // "https://ecommerce-three-umber.vercel.app",
 // "https://hubcredo-frontend-kappa.vercel.app",
+// "http://localhost:3000",
 app.use(cors({
   origin:[
-      "http://localhost:3000",
+    "https://hubcredo-frontend-kappa.vercel.app/login",
         "http://localhost:5173",
         "http://localhost:5174"
     ],
