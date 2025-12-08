@@ -6,6 +6,7 @@ import cors from 'cors';
 import products from '../product.js';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import serverless from 'serverless-http';
 
 
 dotenv.config();
@@ -117,7 +118,8 @@ app.post('/login',async(req,res)=>{
         return res.status(500).json({ message: "Server error" });
       }
 });
-export default app;
+export const handler = serverless(app);
+export default handler;
 // const port=process.env.PORT || 3000;
 
 // app.listen(port,(req,res)=>{
