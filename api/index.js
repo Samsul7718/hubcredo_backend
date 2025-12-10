@@ -58,8 +58,12 @@ async function connectDB(){
   }
   })
 
+app.get("/", (req, res) => {
+  res.send("HubCredo Backend Running ✅");
+});
+
   // Test Route
-app.get("/test", (req, res) => {
+app.get("/api/test", (req, res) => {
   res.json({ message: "Backend is live ✅" });
 });
 
@@ -79,7 +83,7 @@ const User = mongoose.models.User ||
 }));
 
 // Signup route
-app.post("/signup",async(req,res)=>{
+app.post("/api/signup",async(req,res)=>{
       const { name, email, password,mobile,gender } = req.body;
 
       try{
@@ -98,7 +102,7 @@ app.post("/signup",async(req,res)=>{
 });
 
 // Login route
-app.post("/login",async(req,res)=>{
+app.post("/api/login",async(req,res)=>{
       const { email, password } = req.body;
     //   const bcrypt = require("bcryptjs");
 
