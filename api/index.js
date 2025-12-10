@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 // "http://localhost:3000",
 app.use(cors({
   origin:[
-    "https://hubcredo-frontend-kappa.vercel.app/login",
+    "https://hubcredo-frontend-kappa.vercel.app",
         "http://localhost:5173",
         "http://localhost:5174"
     ],
