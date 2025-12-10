@@ -6,7 +6,7 @@ import cors from 'cors';
 import products from '../product.js';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import serverless from 'serverless-http';
+// import serverless from 'serverless-http';
 
 
 dotenv.config();
@@ -43,7 +43,7 @@ async function connectDB(){
     console.log("MongoDB connected");
 
     }catch(error){
-        console.log("Error connecting to MongoDB:",error);
+        console.error("Error connecting to MongoDB:",error);
         throw error;
     }
   }
@@ -53,7 +53,7 @@ async function connectDB(){
    try {
     await connectDB();
     next();
-  } catch (error) {
+  } catch {
     return res.status(500).json({ message: "Database connection failed" });
   }
   })
@@ -66,7 +66,7 @@ app.get("/test", (req, res) => {
 app.get("/product", (req, res) => {
   res.json(products);
 });
-const port=process.env.PORT || 3000;
+// const port=process.env.PORT || 3000;
 
 // user model
 const User = mongoose.models.User ||
@@ -79,7 +79,7 @@ const User = mongoose.models.User ||
 }));
 
 // Signup route
-app.post('/signup',async(req,res)=>{
+app.post("/signup",async(req,res)=>{
       const { name, email, password,mobile,gender } = req.body;
 
       try{
@@ -90,7 +90,7 @@ app.post('/signup',async(req,res)=>{
           const user = new User({ name, email, password: hashedPassword, mobile, gender});
         await user.save();
 
-        res.status(201).json({ message: "User created successfully" ,user});
+        res.status(200).json({ message: "User created successfully" ,user});
 
       }catch(error){
         return res.status(500).json({ message: "Server error" });
@@ -98,7 +98,7 @@ app.post('/signup',async(req,res)=>{
 });
 
 // Login route
-app.post('/login',async(req,res)=>{
+app.post("/login",async(req,res)=>{
       const { email, password } = req.body;
     //   const bcrypt = require("bcryptjs");
 
@@ -109,7 +109,10 @@ app.post('/login',async(req,res)=>{
          const isMatch = await bcrypt.compare(password, user.password);
          if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-         const token = jwt.sign({ id: user._id }, "your_jwt_secret", { expiresIn: "1d" });
+         const token = jwt.sign({ 
+          id: user._id }, 
+         process.env.JWT_SECRET, 
+          { expiresIn: "1d" });
 
           res.status(200).json({ message: "Login successful", token, user });
 
@@ -119,11 +122,11 @@ app.post('/login',async(req,res)=>{
     });
     // const port=process.env.PORT || 3000;
 
-if (process.env.NODE_ENV !== "production") {
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  });
-}
-// export default app;
-export const handler = serverless(app);
-export default handler;
+// if (process.env.NODE_ENV !== "production") {
+//   app.listen(port, () => {
+//     console.log(`Server running on http://localhost:${port}`);
+//   });
+// }
+export default app;
+// export const handler = serverless(app);
+// export default handler;
