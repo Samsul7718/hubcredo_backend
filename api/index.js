@@ -14,7 +14,7 @@ dotenv.config();
 app.use(express.json());
 
 // middleware
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 // "https://ecommerce-three-umber.vercel.app",
 // "https://hubcredo-frontend-kappa.vercel.app",
 // "http://localhost:3000",
@@ -25,6 +25,7 @@ app.use(cors({
         // "http://localhost:5174"
     ],
     methods:['GET', 'POST', 'OPTIONS'],
+     allowedHeaders: ["Content-Type", "Authorization"],
     credentials:true
 }))
 
