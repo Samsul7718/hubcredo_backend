@@ -60,7 +60,7 @@ async function connectDB(){
   }
   })
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("HubCredo Backend Running ✅");
 });
 
