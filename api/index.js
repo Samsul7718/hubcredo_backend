@@ -61,14 +61,14 @@ async function connectDB(){
   }
   })
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   res.send("HubCredo Backend Running ✅");
 });
 
   // Test Route
-app.get("/test", (req, res) => {
-  res.json({ message: "Backend is live ✅" });
-});
+// app.get("/test", (req, res) => {
+//   res.json({ message: "Backend is live ✅" });
+// });
 
 app.get("/api/product", (req, res) => {
   res.json(products);
@@ -117,7 +117,7 @@ app.post("/api/login",async(req,res)=>{
          if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
          const token = jwt.sign({ 
-          id: user._id }, 
+          id: user.id }, 
          process.env.JWT_SECRET, 
           { expiresIn: "1d" });
 
