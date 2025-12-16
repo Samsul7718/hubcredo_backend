@@ -67,7 +67,7 @@ app.get("/test", (req, res) => {
   res.json({ message: "Backend is live ✅" });
 });
 
-app.get("/product", (req, res) => {
+app.get("/api/product", (req, res) => {
   res.json(products);
 });
 // const port=process.env.PORT || 3000;
@@ -83,7 +83,7 @@ const User = mongoose.models.User ||
 }));
 
 // Signup route
-app.post("/signup",async(req,res)=>{
+app.post("/api/signup",async(req,res)=>{
       const { name, email, password,mobile,gender } = req.body;
 
       try{
@@ -102,7 +102,7 @@ app.post("/signup",async(req,res)=>{
 });
 
 // Login route
-app.post("/login",async(req,res)=>{
+app.post("/api/login",async(req,res)=>{
       const { email, password } = req.body;
     //   const bcrypt = require("bcryptjs");
 
@@ -126,11 +126,11 @@ app.post("/login",async(req,res)=>{
     });
     const port=process.env.PORT || 3000;
 
-if (process.env.NODE_ENV !== "production") {
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  });
-}
+// if (process.env.NODE_ENV !== "production") {
+//   app.listen(port, () => {
+//     console.log(`Server running on http://localhost:${port}`);
+//   });
+// }
 export default app;
 // export const handler = serverless(app);
 // export default handler;
