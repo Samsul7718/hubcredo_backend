@@ -9,9 +9,8 @@ import jwt from "jsonwebtoken";
 // import serverless from 'serverless-http';
 
 
-dotenv.config();
-
 const app=express();
+dotenv.config();
 app.use(express.json());
 
 // middleware
@@ -32,7 +31,7 @@ app.use(cors({
 // app.options("*", cors());
 app.options("*", cors());
 
-app.use(express.json());
+// app.use(express.json());
 
 // Mongodb Serverless connection
 
@@ -127,7 +126,7 @@ app.post("/api/login",async(req,res)=>{
         return res.status(500).json({ message: "Server error" });
       }
     });
-    const port=process.env.PORT || 3000;
+    // const port=process.env.PORT || 3000;
 
 // if (process.env.NODE_ENV !== "production") {
 //   app.listen(port, () => {
