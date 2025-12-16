@@ -23,7 +23,7 @@ app.use(cors({
   origin:[
     "https://hubcredo-frontend-kappa.vercel.app",
         "http://localhost:5173",
-        "http://localhost:5174"
+        // "http://localhost:5174"
     ],
     methods:['GET', 'POST', 'OPTIONS'],
     credentials:true
@@ -124,13 +124,13 @@ app.post("/login",async(req,res)=>{
         return res.status(500).json({ message: "Server error" });
       }
     });
-    // const port=process.env.PORT || 3000;
+    const port=process.env.PORT || 3000;
 
-// if (process.env.NODE_ENV !== "production") {
-//   app.listen(port, () => {
-//     console.log(`Server running on http://localhost:${port}`);
-//   });
-// }
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
 export default app;
 // export const handler = serverless(app);
 // export default handler;
