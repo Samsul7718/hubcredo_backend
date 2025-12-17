@@ -13,26 +13,17 @@ const app=express();
 dotenv.config();
 app.use(express.json());
 
-// middleware
-// app.use(bodyParser.json());
-// "https://ecommerce-three-umber.vercel.app",
-// "https://hubcredo-frontend-kappa.vercel.app",
 // "http://localhost:3000",
 app.use(cors({
   origin:[
     "https://hubcredo-frontend-kappa.vercel.app",
         "http://localhost:5173",
-        // "http://localhost:5174"
     ],
     methods:['GET', 'POST', 'OPTIONS'],
      allowedHeaders: ["Content-Type", "Authorization"],
     credentials:true
 }))
 
-// app.options("*", cors());
-// app.options("*", cors());
-
-// app.use(express.json());
 
 // Mongodb Serverless connection
 
