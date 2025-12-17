@@ -56,15 +56,9 @@ app.get("/", (req, res) => {
   res.send("HubCredo Backend Running ✅");
 });
 
-  // Test Route
-// app.get("/test", (req, res) => {
-//   res.json({ message: "Backend is live ✅" });
-// });
-
 app.get("/api/product", (req, res) => {
   res.json(products);
 });
-// const port=process.env.PORT || 3000;
 
 // user model
 const User = mongoose.models.User ||
@@ -98,7 +92,6 @@ app.post("/api/signup",async(req,res)=>{
 // Login route
 app.post("/api/login",async(req,res)=>{
       const { email, password } = req.body;
-    //   const bcrypt = require("bcryptjs");
 
       try{
         const user = await User.findOne({ email });
