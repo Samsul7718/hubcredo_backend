@@ -1,21 +1,19 @@
 import express from 'express';
 import mongoose from 'mongoose';
-// import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import products from '../product.js';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-// import serverless from 'serverless-http';
 
 
 const app=express();
 dotenv.config();
 app.use(express.json());
 
-// "http://localhost:3000",
 app.use(cors({
   origin:[
+    // "http://localhost:3000",
     "https://hubcredo-frontend-kappa.vercel.app",
         "http://localhost:5173",
     ],
@@ -119,5 +117,3 @@ app.post("/api/login",async(req,res)=>{
 //   });
 // }
 export default app;
-// export const handler = serverless(app);
-// export default handler;
