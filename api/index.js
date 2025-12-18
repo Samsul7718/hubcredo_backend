@@ -12,8 +12,8 @@ dotenv.config();
 app.use(express.json());
 
 app.use(cors({
+  // "http://localhost:3000",
   origin:[
-    // "http://localhost:3000",
     "https://hubcredo-frontend-kappa.vercel.app",
         "http://localhost:5173",
     ],
