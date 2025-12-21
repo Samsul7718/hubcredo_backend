@@ -12,9 +12,9 @@ dotenv.config();
 app.use(express.json());
 
 app.use(cors({
-  // "http://localhost:3000",
   origin:[
-    "https://hubcredo-frontend-kappa.vercel.app",
+    // "https://hubcredo-frontend-kappa.vercel.app",
+    "http://localhost:3000",
         "http://localhost:5173",
     ],
     methods:['GET', 'POST', 'OPTIONS'],
@@ -110,11 +110,11 @@ app.post("/api/login",async(req,res)=>{
       }
     });
     
-// const port=process.env.PORT || 3000;
+const port=process.env.PORT || 3000;
 
-// if (process.env.NODE_ENV !== "production") {
-//   app.listen(port, () => {
-//     console.log(`Server running on http://localhost:${port}`);
-//   });
-// }
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
 export default app;
